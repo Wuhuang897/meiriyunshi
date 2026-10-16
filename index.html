@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>玄机一算 · 每日运势</title>
+    <link rel="stylesheet" href="styles/theme.css">
+    <link rel="stylesheet" href="styles/components.css">
+</head>
+<body>
+    <div class="stars"></div>
+
+    <header class="site-header">
+        <h1 class="title">玄 机 一 算</h1>
+        <p class="subtitle">星座 · 塔罗 · 风水 · 占卜</p>
+    </header>
+
+    <!-- 顶部日期 + 固定免责（合规：全程展示） -->
+    <div class="topbar">
+        <div class="date-line" id="topDate">—</div>
+        <div class="disclaimer-mini">本工具所有内容仅供娱乐，不构成任何决策建议</div>
+    </div>
+
+    <main class="container">
+
+        <!-- ============ 首页 ============ -->
+        <section class="page" id="page-home">
+            <!-- 未设置生日引导 -->
+            <div class="guide-card hidden" id="birthGuide">
+                <div class="guide-text">设置生日，获取你的专属星座运势</div>
+                <button class="btn-gold-sm" id="guideSetBtn">去设置</button>
+            </div>
+
+            <div class="module-grid">
+                <div class="module-card" data-go="zodiac">
+                    <div class="mc-icon">✦</div>
+                    <div class="mc-title">星座运势</div>
+                    <div class="mc-desc" id="homeZodiacDesc">查看今日五维运势</div>
+                    <div class="mc-foot" id="homeZodiacFoot">进入 →</div>
+                </div>
+
+                <div class="module-card" data-go="tarot">
+                    <div class="mc-icon">🃏</div>
+                    <div class="mc-title">塔罗牌</div>
+                    <div class="mc-desc" id="homeTarotDesc">抽取你的今日一牌</div>
+                    <div class="mc-foot">进入 →</div>
+                </div>
+
+                <div class="module-card" data-go="fengshui">
+                    <div class="mc-icon">☯</div>
+                    <div class="mc-title">每日风水</div>
+                    <div class="mc-desc" id="homeFengshuiDesc">今日有利方位与小建议</div>
+                    <div class="mc-foot">进入 →</div>
+                </div>
+
+                <div class="module-card" data-go="divination">
+                    <div class="mc-icon">䷀</div>
+                    <div class="mc-title">占卜问卦</div>
+                    <div class="mc-desc" id="homeDivinationDesc">今日一卦 · 心诚则灵</div>
+                    <div class="mc-foot">进入 →</div>
+                </div>
+            </div>
+
+            <div class="tip-card">
+                <div class="tip-title">今日提醒</div>
+                <div class="tip-text" id="homeTip">数据每日 0 点自动更新</div>
+            </div>
+        </section>
+
+        <!-- ============ 星座 ============ -->
+        <section class="page hidden" id="page-zodiac">
+            <div class="page-head">
+                <button class="btn-back" data-back>← 返回</button>
+                <h2 class="page-title">星座运势</h2>
+            </div>
+
+            <div class="zodiac-switch">
+                <label>当前星座</label>
+                <select id="zodiacSelect"></select>
+            </div>
+
+            <div class="overall-box">
+                <div class="ov-score"><span id="zdOverall">--</span><i>星</i></div>
+                <div class="ov-info">
+                    <div class="ov-name" id="zdName">—</div>
+                    <div class="ov-text" id="zdOverallText">—</div>
+                </div>
+            </div>
+
+            <div class="dim-list">
+                <div class="dim-item"><span class="dim-name">事业运</span><span class="stars" id="zdCareerStars"></span><p class="dim-text" id="zdCareerText">—</p></div>
+                <div class="dim-item"><span class="dim-name">财运</span><span class="stars" id="zdWealthStars"></span><p class="dim-text" id="zdWealthText">—</p></div>
+                <div class="dim-item"><span class="dim-name">感情运</span><span class="stars" id="zdLoveStars"></span><p class="dim-text" id="zdLoveText">—</p></div>
+                <div class="dim-item"><span class="dim-name">健康运</span><span class="stars" id="zdHealthStars"></span><p class="dim-text" id="zdHealthText">—</p></div>
+            </div>
+
+            <div class="lucky-box">
+                <div class="lk"><span>幸运颜色</span><b id="zdColor">—</b></div>
+                <div class="lk"><span>幸运数字</span><b id="zdNumber">—</b></div>
+                <div class="lk"><span>幸运方位</span><b id="zdDirection">—</b></div>
+            </div>
+
+            <div class="avoid-box">
+                <span class="avoid-label">避雷提醒</span>
+                <span class="avoid-text" id="zdAvoid">—</span>
+            </div>
+
+            <button class="btn-gold" id="zdShareBtn">生成分享图片</button>
+            <p class="disclaimer-block">※ 星座运势仅供娱乐参考，不构成任何决策建议。</p>
+        </section>
+
+        <!-- ============ 塔罗 ============ -->
+        <section class="page hidden" id="page-tarot">
+            <div class="page-head">
+                <button class="btn-back" data-back>← 返回</button>
+                <h2 class="page-title">塔罗牌</h2>
+            </div>
+
+            <div class="draw-area">
+                <div class="card-back" id="tarotCard">
+                    <div class="cb-inner">
+                        <div class="cb-face" id="tarotFace">✦</div>
+                    </div>
+                </div>
+                <button class="btn-gold" id="tarotDrawBtn">抽取今日一牌</button>
+                <p class="draw-hint">每日一牌，同一天结果固定</p>
+            </div>
+
+            <div class="result-box hidden" id="tarotResult">
+                <div class="tarot-head">
+                    <span class="tarot-emoji" id="trEmoji">🃏</span>
+                    <div>
+                        <div class="tarot-name" id="trName">—</div>
+                        <div class="tarot-pos" id="trPosition">—</div>
+                    </div>
+                </div>
+                <div class="kw-row" id="trKeywords"></div>
+                <div class="sec-label">牌意解读</div>
+                <p class="sec-text" id="trMeaning">—</p>
+                <div class="sec-label">今日指引</div>
+                <p class="sec-text" id="trAdvice">—</p>
+                <button class="btn-ghost" id="tarotShareBtn">生成分享图片</button>
+            </div>
+
+            <div class="ask-box">
+                <div class="sec-label">问事占卜</div>
+                <input type="text" id="tarotQuestion" placeholder="输入你想问的事（可选）" maxlength="30">
+                <button class="btn-gold-sm" id="tarotAskBtn">为这件事抽一张牌</button>
+                <p class="draw-hint">同一问题当天结果固定</p>
+            </div>
+
+            <p class="disclaimer-block">※ 塔罗解读仅供娱乐参考，不构成任何决策建议。</p>
+        </section>
+
+        <!-- ============ 风水 ============ -->
+        <section class="page hidden" id="page-fengshui">
+            <div class="page-head">
+                <button class="btn-back" data-back>← 返回</button>
+                <h2 class="page-title">每日风水</h2>
+            </div>
+
+            <div class="disclaimer-inline">仅民俗趣味参考，不作为装修、布局决策依据</div>
+
+            <div class="fs-dir-box">
+                <div class="fs-dir-label">今日有利方位</div>
+                <div class="fs-dir-value" id="fsDirection">—</div>
+                <div class="fs-dir-note" id="fsDirectionNote">—</div>
+            </div>
+
+            <div class="sec-label">居家小建议</div>
+            <ul class="fs-list" id="fsHomeTips"></ul>
+
+            <div class="sec-label">避坑提醒</div>
+            <div class="avoid-box">
+                <span class="avoid-label">注意</span>
+                <span class="avoid-text" id="fsAvoid">—</span>
+            </div>
+
+            <div class="sec-label">民俗小知识</div>
+            <p class="sec-text" id="fsKnowledge">—</p>
+
+            <button class="btn-gold" id="fsShareBtn">生成分享图片</button>
+            <p class="disclaimer-block">※ 风水提示仅供娱乐参考，不作为装修、布局决策依据。</p>
+        </section>
+
+        <!-- ============ 占卜 ============ -->
+        <section class="page hidden" id="page-divination">
+            <div class="page-head">
+                <button class="btn-back" data-back>← 返回</button>
+                <h2 class="page-title">占卜问卦</h2>
+            </div>
+
+            <div class="draw-area">
+                <div class="hex-symbol" id="hexSymbol">䷀</div>
+                <button class="btn-gold" id="hexDrawBtn">摇一卦 · 今日卦象</button>
+                <p class="draw-hint">每日一卦，同一天结果固定</p>
+            </div>
+
+            <div class="result-box hidden" id="hexResult">
+                <div class="hex-name"><span id="hexName">—</span><em class="nature" id="hexNature">—</em></div>
+                <div class="hex-line" id="hexLine">—</div>
+                <div class="sec-label">今日指引</div>
+                <p class="sec-text" id="hexGuide">—</p>
+                <button class="btn-ghost" id="hexShareBtn">生成分享图片</button>
+            </div>
+
+            <div class="ask-box">
+                <div class="sec-label">问事占卜</div>
+                <input type="text" id="hexQuestion" placeholder="输入你想问的事（可选）" maxlength="30">
+                <button class="btn-gold-sm" id="hexAskBtn">为这件事起一卦</button>
+                <p class="draw-hint">同一问题当天结果固定</p>
+            </div>
+
+            <p class="disclaimer-block">※ 卦象解读仅供娱乐参考，不构成任何决策建议。</p>
+        </section>
+
+        <!-- ============ 我的 ============ -->
+        <section class="page hidden" id="page-mine">
+            <div class="page-head"><h2 class="page-title">我的</h2></div>
+
+            <div class="card-block">
+                <div class="sec-label">我的资料</div>
+                <div class="form-row">
+                    <label>昵称</label>
+                    <input type="text" id="mNickname" placeholder="选填" maxlength="12">
+                </div>
+                <div class="form-row">
+                    <label>生日</label>
+                    <input type="date" id="mBirthday">
+                </div>
+                <div class="form-row">
+                    <label>星座</label>
+                    <div class="readonly" id="mZodiac">—</div>
+                </div>
+                <button class="btn-gold" id="mSaveBtn">保存资料</button>
+                <p class="save-hint" id="mSaveHint"></p>
+            </div>
+
+            <div class="card-block">
+                <div class="sec-label">历史记录</div>
+                <div id="mHistory"></div>
+            </div>
+
+            <div class="card-block">
+                <div class="sec-label">关于 & 免责声明</div>
+                <p class="sec-text">
+                    玄机一算是一款轻量娱乐型运势工具，整合星座、塔罗、风水、占卜等趣味内容。
+                    本工具所有运势、牌意、卦象、风水内容均<b>仅供娱乐参考</b>，
+                    不构成任何人生、投资、健康、装修或决策建议，请理性看待，切勿迷信。
+                </p>
+                <p class="sec-text">
+                    生日仅用于计算星座，保存在本机，不会上传。
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <nav class="tabbar">
+        <button class="tab-item active" data-tab="home"><span>✦</span>首页</button>
+        <button class="tab-item" data-tab="mine"><span>☺</span>我的</button>
+    </nav>
+
+    <!-- 分享图预览弹窗 -->
+    <div class="modal hidden" id="shareModal">
+        <div class="modal-mask" id="shareMask"></div>
+        <div class="modal-body">
+            <div class="modal-title">分享卡片</div>
+            <img id="shareImg" alt="分享卡片">
+            <div class="modal-actions">
+                <button class="btn-ghost" id="shareClose">关闭</button>
+                <button class="btn-gold-sm" id="shareDownload">保存图片</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 加载顺序：data 先于 core，store/share 先于 ui，main 最后 -->
+    <script src="js/core/random.js"></script>
+    <script src="js/core/date.js"></script>
+    <script src="js/data/fortune-text.js"></script>
+    <script src="js/data/tarot-data.js"></script>
+    <script src="js/data/fengshui-text.js"></script>
+    <script src="js/data/divination-data.js"></script>
+    <script src="js/core/zodiac.js"></script>
+    <script src="js/core/tarot.js"></script>
+    <script src="js/core/fengshui.js"></script>
+    <script src="js/core/divination.js"></script>
+    <script src="js/store.js"></script>
+    <script src="js/share.js"></script>
+    <script src="js/ui/ui-common.js"></script>
+    <script src="js/ui/ui-home.js"></script>
+    <script src="js/ui/ui-zodiac.js"></script>
+    <script src="js/ui/ui-tarot.js"></script>
+    <script src="js/ui/ui-fengshui.js"></script>
+    <script src="js/ui/ui-divination.js"></script>
+    <script src="js/ui/ui-mine.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

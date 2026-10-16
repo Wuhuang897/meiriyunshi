@@ -1,0 +1,124 @@
+/* ============================================================
+ * theme.css —— 主题变量 / 重置 / 全局框架 / 底部导航
+ * ============================================================ */
+:root {
+    --bg-deep: #0b0b1a;
+    --bg-card: rgba(22, 18, 36, 0.85);
+    --gold: #d4af6a;
+    --gold-light: #e9c989;
+    --gold-soft: rgba(212, 175, 106, 0.18);
+    --red: #c14a4a;
+    --red-light: #e26363;
+    --text: #f3e9d2;
+    --text-dim: #b8a78a;
+    --text-mute: #7a6f5c;
+    --border: rgba(212, 175, 106, 0.35);
+    --shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+    min-height: 100%;
+    background: radial-gradient(ellipse at top, #1a1230 0%, var(--bg-deep) 70%);
+    color: var(--text);
+    font-family: "PingFang SC", "Microsoft YaHei", "STHeiti", serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ---- 星空背景 ---- */
+.stars {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background:
+        radial-gradient(1px 1px at 20% 30%, #fff8e0 50%, transparent 100%),
+        radial-gradient(1px 1px at 80% 20%, #fff 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 50% 70%, #e9c989 50%, transparent 100%),
+        radial-gradient(1px 1px at 10% 80%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 90% 60%, #fff 50%, transparent 100%),
+        radial-gradient(1.5px 1.5px at 35% 15%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 65% 90%, #fff 50%, transparent 100%),
+        radial-gradient(1px 1px at 5% 50%, #fff 50%, transparent 100%);
+    opacity: 0.6;
+    animation: twinkle 6s ease-in-out infinite alternate;
+}
+@keyframes twinkle { from { opacity: .4; } to { opacity: .8; } }
+
+/* ---- 头部 ---- */
+.site-header { position: relative; z-index: 1; text-align: center; padding: 34px 20px 10px; }
+.title {
+    font-size: clamp(28px, 6.5vw, 46px);
+    letter-spacing: .45em;
+    color: var(--gold);
+    text-shadow: 0 0 18px rgba(212, 175, 106, .55);
+    font-weight: 600;
+    margin-left: .45em;
+}
+.subtitle { margin-top: 8px; color: var(--text-dim); letter-spacing: .28em; font-size: 12px; }
+
+/* ---- 顶部日期条 + 免责（合规：固定展示） ---- */
+.topbar {
+    position: relative; z-index: 1;
+    text-align: center; padding: 12px 20px 4px;
+}
+.date-line { color: var(--gold-light); font-size: 14px; letter-spacing: .12em; }
+.disclaimer-mini { margin-top: 4px; color: var(--text-mute); font-size: 11px; letter-spacing: .08em; }
+
+/* ---- 主体 ---- */
+.container {
+    position: relative; z-index: 1;
+    max-width: 680px; margin: 10px auto 110px; padding: 0 16px;
+}
+.page { animation: fadeIn .35s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+.hidden { display: none !important; }
+
+/* ---- 底部 Tab ---- */
+.tabbar {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 20;
+    display: flex; justify-content: space-around;
+    background: rgba(11, 11, 26, .96);
+    border-top: 1px solid var(--border);
+    padding: 8px 0 max(8px, env(safe-area-inset-bottom));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+.tab-item {
+    flex: 1; background: none; border: none; cursor: pointer;
+    color: var(--text-mute); font-family: inherit; font-size: 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    padding: 4px 0; letter-spacing: .15em;
+}
+.tab-item span { font-size: 18px; }
+.tab-item.active { color: var(--gold); }
+
+/* ---- 页头 / 返回 ---- */
+.page-head { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.page-title { color: var(--gold); font-size: 20px; letter-spacing: .2em; font-weight: 600; }
+.btn-back {
+    background: none; border: 1px solid var(--border); color: var(--text-dim);
+    border-radius: 999px; padding: 6px 14px; cursor: pointer;
+    font-family: inherit; font-size: 13px; letter-spacing: .1em;
+}
+.btn-back:active { background: var(--gold-soft); }
+
+/* ---- 通用区块标题 ---- */
+.sec-label {
+    color: var(--gold-light); font-size: 13px; letter-spacing: .2em;
+    margin: 18px 0 8px; padding-left: 8px; border-left: 3px solid var(--gold);
+}
+.sec-text { color: var(--text); font-size: 14px; line-height: 1.75; }
+.disclaimer-block {
+    margin-top: 16px; text-align: center; color: var(--text-mute);
+    font-size: 11px; letter-spacing: .08em; line-height: 1.6;
+}
+.disclaimer-inline {
+    background: rgba(193, 74, 74, .1); border: 1px solid rgba(193, 74, 74, .35);
+    color: var(--red-light); font-size: 12px; padding: 8px 12px;
+    border-radius: 8px; margin-bottom: 14px; text-align: center;
+}
+
+@media (max-width: 540px) {
+    .container { padding: 0 12px; }
+    .title { letter-spacing: .3em; margin-left: .3em; }
+}
